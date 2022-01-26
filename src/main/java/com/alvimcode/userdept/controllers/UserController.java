@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,4 +28,22 @@ public class UserController {
 		List<User>result = repository.findAll();
 		return result;
 	}
+	
+	//Endpoint da aplicação para busca um usuarios
+		@GetMapping(value = "/{id}")
+		public User findById(@PathVariable Long id){
+			User result = repository.findById(id).get();
+			return result;
+		}
+		
+		//Endpoint da aplicação para salva um novo usuario
+				@PostMapping
+				public User insert(@RequestBody User user){
+					User result = repository.save(user);
+					return result;
+				}
+	
+	
+	
+	
 }
